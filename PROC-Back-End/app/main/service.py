@@ -142,4 +142,4 @@ def get_orders():
 def get_order_by_id(_id):
     order = Order.query.get(_id)
     order_serializer = OrderSerializer()
-    return order_serializer.jsonify({}) if order else Response(status=404)
+    return order_serializer.jsonify(order) if order else Response(status=404)
