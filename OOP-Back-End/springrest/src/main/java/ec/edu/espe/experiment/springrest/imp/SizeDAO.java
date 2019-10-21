@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import ec.edu.espe.experiment.springrest.dao.ISizeDAO;
+import ec.edu.espe.experiment.springrest.dto.Ingredient;
 import ec.edu.espe.experiment.springrest.dto.Size;
 import ec.edu.espe.experiment.springrest.model.DBSize;
 import ec.edu.espe.experiment.springrest.repo.ISizeRepo;
@@ -31,6 +32,7 @@ public class SizeDAO implements ISizeDAO{
         }
         catch(Exception e){
             list = new ArrayList<>();
+            list.add(new Size(1,e.toString(),(float)0));
         }
         return list;
     }
