@@ -37,9 +37,9 @@ def update_ingredient():
 
 @urls.route('/ingredient/id/<_id>', methods=GET)
 def get_ingredient_by_id(_id):
-    ingredient = Ingredient()
+    ingredient = Ingredient.query.get(_id)
     ingredient_serializer = IngredientSerializer()
-    return ingredient_serializer.jsonify(ingredient) if ingredient._id else Response(status=404)
+    return ingredient_serializer.jsonify(ingredient) if ingredient else Response(status=404)
 
 
 @urls.route('/ingredient', methods=GET)
