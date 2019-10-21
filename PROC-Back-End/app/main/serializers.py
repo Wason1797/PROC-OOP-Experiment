@@ -30,6 +30,7 @@ class OrderDetailSerializer(ma.ModelSchema):
 
 class OrderSerializer(ma.ModelSchema):
     size = ma.Nested(SizeSerializer)
+    #detail = ma.Nested(OrderDetailSerializer, many=True)
     detail = ma.Nested(OrderDetailSerializer, many=True)
 
     class Meta:
