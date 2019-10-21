@@ -24,7 +24,7 @@ class OrderDetailSerializer(ma.ModelSchema):
         model = OrderDetail
         fields = (
             'ingredient_price',
-            'ingredient'
+            'ingredient',
         )
 
 
