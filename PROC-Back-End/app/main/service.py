@@ -138,7 +138,6 @@ def get_orders():
     result = get_all(Order, OrderSerializer)
     return jsonify(result)
 
-
 @urls.route('/order/id/<_id>', methods=GET)
 def get_order_by_id(_id):
     order = Order()
