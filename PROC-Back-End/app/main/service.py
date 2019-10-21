@@ -89,12 +89,6 @@ def get_size():
     result = get_all(Size, SizeSerializer)
     return jsonify(result)
 
-#@urls.route('/ingredient/id/<_id>', methods=GET)
-#def get_ingredient_by_id(_id):
- #   ingredient = Ingredient()
-  #  ingredient_serializer = IngredientSerializer()
-   # return ingredient_serializer.jsonify(ingredient) if ingredient._id else Response(status=404)
-
 
 # Order Routes
 
@@ -105,9 +99,9 @@ def create_order():
         if check_required_keys(('client_name', 'client_dni', 'client_address', 'client_phone', 'size'), request.json):
 
             client_name = request.json.get('client_name')
-            client_dni = None
-            client_address = None
-            client_phone = None
+            client_dni = request.json.get('client_dni')
+            client_address = request.json.get('client_address')
+            client_phone = request.json.get('client_phone')
             size_id = int(request.json.get('size'))
             ingredients = request.json.get('ingredients')
 
@@ -139,15 +133,14 @@ def create_order():
     except Exception:
         return Response(status=400)
 
+@urls.route('/order/id/<_id>', methods=GET)
+def get_order_by_id(_id):
+    order = Order()
+    order_serializer = OrderSerializer()
+#   return order_serializer.jsonify({}) if order else Response(status=404)
+    return order_serializer.jsonify(order) if order._id else Response(status=404)
 
 @urls.route('/order', methods=GET)
 def get_orders():
     result = get_all(Order, OrderSerializer)
     return jsonify(result)
-
-
-@urls.route('/order/id/<_id>', methods=GET)
-def get_order_by_id(_id):
-    order = Order()
-    order_serializer = OrderSerializer()
-    return order_serializer.jsonify({}) if order else Response(status=404)
