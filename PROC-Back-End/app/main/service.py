@@ -21,7 +21,6 @@ def create_ingredient():
     except Exception:
         return Response(status=400)
 
-
 @urls.route('/ingredient', methods=PUT)
 def update_ingredient():
     try:
@@ -136,6 +135,6 @@ def get_orders():
 
 @urls.route('/order/id/<_id>', methods=GET)
 def get_order_by_id(_id):
-    order = Order()
+    order = Order.query.get(_id)
     order_serializer = OrderSerializer()
-    return order_serializer.jsonify({}) if order else Response(status=404)
+    return order_serializer.jsonify(order) if order._id else Response(status=404)
