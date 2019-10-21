@@ -50,6 +50,11 @@ def get_ingredients():
 
 # Pizza Size Routes
 
+@urls.route('/size', methods=GET)
+def get_size():
+    result = get_all(Size, SizeSerializer)
+    return jsonify(result)
+
 @urls.route('/size', methods=POST)
 def create_size():
     try:
