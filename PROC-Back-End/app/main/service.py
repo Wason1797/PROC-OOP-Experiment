@@ -84,7 +84,12 @@ def get_size_by_id(_id):
     return size_serializer.jsonify(size) if size else Response(status=404)
 
 
+@urls.route('/size', methods=GET)
+def get_sizes():
+    result = get_all(Size, SizeSerializer)
+    return jsonify(result)
 # Order Routes
+
 
 @urls.route('/order', methods=POST)
 def create_order():
