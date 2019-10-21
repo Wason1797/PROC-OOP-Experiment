@@ -127,8 +127,11 @@ def test_get_sizes(client, size_uri, sizes, status_code):
     response = client.get(size_uri)
 
     pytest.assume(response.status.startswith(status_code))
+  
 
     for i in range(len(sizes)):
         pytest.assume(response.json[i].get('_id') is not None)
         pytest.assume(response.json[i].get('name') == sizes[i].get('name'))
         pytest.assume(response.json[i].get('price') == sizes[i].get('price'))
+    
+
