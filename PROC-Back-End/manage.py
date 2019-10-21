@@ -4,8 +4,7 @@ from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
 import pytest
 
-
-# from app.main.models import Order, OrderDetail, Ingredient, Size
+from app.main.models import Order, OrderDetail, Ingredient, Size
 
 flask_app.app_context().push()
 
