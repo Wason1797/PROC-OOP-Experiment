@@ -9,8 +9,8 @@ def get_all(Model, Serializer):
 def calculate_order_price(order, ingredients):
     
     size_price = order.size.price
-    s=sum(ingredient.price for ingredient in ingredients)
-    total=size_price+s
+    sumatotal=sum(ingredient.price for ingredient in ingredients)
+    total=size_price+sumatotal
     return round(total, 2)
 
 
