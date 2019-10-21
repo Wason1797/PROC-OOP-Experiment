@@ -12,7 +12,7 @@ flask_app.app_context().push()
 manager = Manager(flask_app)
 
 migrate = Migrate(flask_app, db)
-
+      
 manager.add_command('db', MigrateCommand)
 
 
