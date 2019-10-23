@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import ec.edu.espe.experiment.springrest.dao.ISizeDAO;
+import ec.edu.espe.experiment.springrest.dto.Ingredient;
 import ec.edu.espe.experiment.springrest.dto.Size;
 import ec.edu.espe.experiment.springrest.model.DBSize;
 import ec.edu.espe.experiment.springrest.repo.ISizeRepo;
@@ -17,14 +18,13 @@ public class SizeDAO implements ISizeDAO{
 
     @Autowired
     private ISizeRepo repo;
-
     @Override
     public List<Size> getAll(){
         List<Size> list = new ArrayList<>();
         try{
             List<DBSize> list_dbSize = repo.findAll();
             if(list_dbSize != null){
-                 for(DBSize dbSize : list_dbSize){
+                for(DBSize dbSize : list_dbSize){
                     list.add(toSize(dbSize));
                 }
             }
