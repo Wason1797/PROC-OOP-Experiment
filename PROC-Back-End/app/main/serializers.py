@@ -4,6 +4,8 @@ from .models import Ingredient, Size, Order, OrderDetail
 
 class IngredientSerializer(ma.ModelSchema):
 
+    
+
     class Meta:
         model = Ingredient
         fields = ('_id', 'name', 'price')
@@ -23,6 +25,7 @@ class OrderDetailSerializer(ma.ModelSchema):
     class Meta:
         model = OrderDetail
         fields = (
+            '_id'
             'ingredient_price',
             'ingredient'
         )
