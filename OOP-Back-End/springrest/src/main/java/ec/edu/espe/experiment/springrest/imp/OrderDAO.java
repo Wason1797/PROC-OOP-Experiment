@@ -9,13 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import ec.edu.espe.experiment.springrest.dao.IDetailDAO;
+import ec.edu.espe.experiment.springrest.dao.IIngredientDAO;
 import ec.edu.espe.experiment.springrest.dao.IOrderDAO;
 import ec.edu.espe.experiment.springrest.dao.ISizeDAO;
 import ec.edu.espe.experiment.springrest.dto.Ingredient;
 import ec.edu.espe.experiment.springrest.dto.Order;
 import ec.edu.espe.experiment.springrest.dto.OrderEntityClient;
 import ec.edu.espe.experiment.springrest.dto.Size;
-import ec.edu.espe.experiment.springrest.model.DBIngredient;
 import ec.edu.espe.experiment.springrest.model.DBOrder;
 import ec.edu.espe.experiment.springrest.repo.IOrderRepo;
 import ec.edu.espe.experiment.springrest.repo.ISizeRepo;
@@ -34,6 +34,9 @@ public class OrderDAO implements IOrderDAO {
 
     @Autowired
     private ISizeDAO daoSize;
+
+    @Autowired
+    private IIngredientDAO daoIngredient;
 
     @Override
     public List<Order> getAll() {
@@ -74,8 +77,7 @@ public class OrderDAO implements IOrderDAO {
             DBOrder dbOrder = new DBOrder();
             dbOrder.setName(entity.getClient_name());
             dbOrder.setAddress(entity.getClient_address());
-            dbOrder.setDni(entity.getClient_dni());
-            
+            dbOrder.setDni(entity.getClient_dni());            
             dbOrder.setPhone(entity.getClient_phone());
             dbOrder.setDate(new Date());
             dbOrder.setSize(repoSize.findById(entity.getSize()).get());
@@ -83,7 +85,13 @@ public class OrderDAO implements IOrderDAO {
             repoOrder.flush();
             List<Ingredient> list_ingredient = daoDetail.post(dbOrder.getId(), entity.getIngredients());
             Size size = daoSize.get(dbOrder.getSize().getId());
+            Ingredient ingredient = daoIngredient.get(dbOrder.getSize().getId());
             Float total_price = 0f;
+            for(int i = 0; i< list_ingredient.size(); i++)
+            {
+                total_price = list_ingredient.get(i).getPrice()+total_price;
+            }
+            total_price = total_price + size.getPrice();
             
             dbOrder.setTotal(total_price);
             repoOrder.save(dbOrder);
