@@ -24,13 +24,14 @@ public class SizeDAO implements ISizeDAO{
         try{
             List<DBSize> list_dbSize = repo.findAll();
             if(list_dbSize != null){
-                for(DBSize dbSize : list_dbSize){
+                 for(DBSize dbSize : list_dbSize){
                     list.add(toSize(dbSize));
                 }
             }
         }
         catch(Exception e){
             list = new ArrayList<>();
+            list.add(new Size(1,e.toString(),(float)0));
         }
         return list;
     }
