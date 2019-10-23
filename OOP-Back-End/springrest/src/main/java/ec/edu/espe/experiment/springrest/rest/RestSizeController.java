@@ -29,6 +29,10 @@ public class RestSizeController {
     private ISizeDAO dao;
 
   
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Size> getAll() {        
+        return dao.getAll();
+    }
 
     @GetMapping(value = "/id/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Size> get(@PathVariable("id") Integer id) {
@@ -39,6 +43,7 @@ public class RestSizeController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
         }
     }
+ 
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Size> post(@RequestBody Size entity) {
@@ -49,6 +54,9 @@ public class RestSizeController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
     }
+
+   
+
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Size> put(@RequestBody Size entity){
