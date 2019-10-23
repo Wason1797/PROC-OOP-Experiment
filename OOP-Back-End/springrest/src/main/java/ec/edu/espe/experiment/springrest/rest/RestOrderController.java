@@ -7,12 +7,14 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import ec.edu.espe.experiment.springrest.dao.IOrderDAO;
+import ec.edu.espe.experiment.springrest.dto.Ingredient;
 import ec.edu.espe.experiment.springrest.dto.Order;
 import ec.edu.espe.experiment.springrest.dto.OrderEntityClient;
 
@@ -30,7 +32,9 @@ public class RestOrderController{
 
     @GetMapping(value = "/id/{id}")
     public Order get(@PathVariable("id") Integer id) {
-        return new Order();
+        Order response =  null;
+        response= dao.get(id);
+        return response;
     }
 
     @PostMapping
