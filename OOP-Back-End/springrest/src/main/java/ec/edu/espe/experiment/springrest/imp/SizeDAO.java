@@ -21,7 +21,7 @@ public class SizeDAO implements ISizeDAO{
     @Override
     public List<Size> getAll(){
         List<Size> list = new ArrayList<>();
-        try{
+         try{
             List<DBSize> list_dbSize = repo.findAll();
             if(list_dbSize != null){
                 for(DBSize dbSize : list_dbSize){
@@ -31,6 +31,7 @@ public class SizeDAO implements ISizeDAO{
         }
         catch(Exception e){
             list = new ArrayList<>();
+            list.add(new Size(1,e.toString(),(float)0));
         }
         return list;
     }
