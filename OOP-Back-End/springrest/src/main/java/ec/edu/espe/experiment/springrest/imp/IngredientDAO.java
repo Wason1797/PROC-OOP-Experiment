@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import ec.edu.espe.experiment.springrest.dao.IIngredientDAO;
 import ec.edu.espe.experiment.springrest.dto.Ingredient;
 import ec.edu.espe.experiment.springrest.model.DBIngredient;
+import ec.edu.espe.experiment.springrest.model.DBSize;
 import ec.edu.espe.experiment.springrest.repo.IIngredientRepo;
 
 @Repository
@@ -40,8 +41,11 @@ public class IngredientDAO implements IIngredientDAO{
     public Ingredient get(Integer id){
         Ingredient ingredient = null;
         try{
-            
+             Optional<DBIngredient> dbIngredient = repo.findById(id);
+            if(dbIngredient != null){
+                ingredient= toIngredient(dbIngredient.get());
         }
+    }
         catch(Exception e){
             ingredient = null;
         }
