@@ -51,7 +51,7 @@ public class OrderDAO implements IOrderDAO {
         }
         return list;
     }
-
+    @Override
     public Order get(Integer id) {
         Order order = new Order();
         try {
@@ -66,23 +66,29 @@ public class OrderDAO implements IOrderDAO {
         }
         return order;
     }
-
+    @Override
     public Order post(OrderEntityClient entity) {
         Order response = new Order();
         try {
             DBOrder dbOrder = new DBOrder();
             dbOrder.setName(entity.getClient_name());
-            /*dbOrder.setAddress(entity.getClient_address());
+            dbOrder.setAddress(entity.getClient_address());
             dbOrder.setDni(entity.getClient_dni());
             
-            dbOrder.setPhone(entity.getClient_phone());*/
+            dbOrder.setPhone(entity.getClient_phone());
             dbOrder.setDate(new Date());
             dbOrder.setSize(repoSize.findById(entity.getSize()).get());
             repoOrder.save(dbOrder);
             repoOrder.flush();
             List<Ingredient> list_ingredient = daoDetail.post(dbOrder.getId(), entity.getIngredients());
             Size size = daoSize.get(dbOrder.getSize().getId());
-            Float total_price = 0f;
+            
+            float total_price = 0.0f;
+            for(Ingredient ingredient:list_ingredient){
+                total_price=total_price+ingredient.getPrice();
+                
+            }
+            total_price=total_price+dbOrder.getSize().getPrice();
             
             dbOrder.setTotal(total_price);
             repoOrder.save(dbOrder);
