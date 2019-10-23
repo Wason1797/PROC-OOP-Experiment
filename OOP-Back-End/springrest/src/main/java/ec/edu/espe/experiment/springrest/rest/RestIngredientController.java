@@ -22,7 +22,7 @@ import ec.edu.espe.experiment.springrest.dto.Ingredient;
 
 
 @RequestMapping("/api/ingredient")
-@RestController
+@RestController 
 @CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT})
 
 public class RestIngredientController {
@@ -38,11 +38,13 @@ public class RestIngredientController {
     @GetMapping(value = "/id/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Ingredient> get(@PathVariable("id") Integer id) {
         Ingredient response =  dao.get(id);
+    
         if(response != null){
             return ResponseEntity.status(HttpStatus.OK).body(response);
         } else{
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
+        
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
