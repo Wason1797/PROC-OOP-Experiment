@@ -32,7 +32,6 @@ public class DetailDAO implements IDetailDAO {
     public List<Detail> getIngredientList(Integer idOrder) {
         List<Detail> listDetail = new ArrayList<>();
         try {
-            
             List<DBDetailOrder> listDBDetail = repoDetail.findAll();
             if (listDBDetail != null) {
                 for (DBDetailOrder aux_detail : listDBDetail) {

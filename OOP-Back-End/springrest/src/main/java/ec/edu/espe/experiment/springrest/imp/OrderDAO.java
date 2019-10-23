@@ -58,8 +58,6 @@ public class OrderDAO implements IOrderDAO {
             Optional<DBOrder> aux_order = repoOrder.findById(id);
             if (aux_order != null) {
                 order = toOrder(aux_order.get());
-            } else {
-                order = null;
             }
         } catch (Exception e) {
             order = null;
@@ -72,18 +70,20 @@ public class OrderDAO implements IOrderDAO {
         try {
             DBOrder dbOrder = new DBOrder();
             dbOrder.setName(entity.getClient_name());
-            /*dbOrder.setAddress(entity.getClient_address());
+            dbOrder.setAddress(entity.getClient_address());
             dbOrder.setDni(entity.getClient_dni());
-            
-            dbOrder.setPhone(entity.getClient_phone());*/
+
+            dbOrder.setPhone(entity.getClient_phone());
             dbOrder.setDate(new Date());
             dbOrder.setSize(repoSize.findById(entity.getSize()).get());
             repoOrder.save(dbOrder);
             repoOrder.flush();
+
             List<Ingredient> list_ingredient = daoDetail.post(dbOrder.getId(), entity.getIngredients());
             Size size = daoSize.get(dbOrder.getSize().getId());
+
             Float total_price = 0f;
-            
+
             dbOrder.setTotal(total_price);
             repoOrder.save(dbOrder);
             repoOrder.flush();
@@ -95,7 +95,7 @@ public class OrderDAO implements IOrderDAO {
     }
 
     @Override
-    public Order toOrder(DBOrder dbOrder){
+    public Order toOrder(DBOrder dbOrder) {
         Order order = new Order();
         order.set_id(dbOrder.getId());
         order.setClient_address(dbOrder.getAddress());

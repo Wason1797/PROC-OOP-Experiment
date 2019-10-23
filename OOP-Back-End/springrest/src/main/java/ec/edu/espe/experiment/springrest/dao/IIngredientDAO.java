@@ -4,6 +4,7 @@ import java.util.List;
 
 import ec.edu.espe.experiment.springrest.dto.Ingredient;
 import ec.edu.espe.experiment.springrest.model.DBIngredient;
+import ec.edu.espe.experiment.springrest.model.DBSize;
 
 
 public interface IIngredientDAO{
