@@ -31,7 +31,7 @@ public class IngredientDAO implements IIngredientDAO{
         }
         catch(Exception e){
             list = new ArrayList<>();
-            list.add(new Ingredient(1,e.toString(),(float)0));
+           list.add(new Ingredient(1,e.toString(),(float)0));
         }
         return list;
     }
