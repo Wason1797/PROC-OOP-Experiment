@@ -46,7 +46,11 @@ def get_ingredient_by_id(_id):
 def get_ingredients():
     result = get_all(Ingredient, IngredientSerializer)
     return jsonify(result)
-
+    
+@urls.route('/size', methods=GET)
+def get_size():
+    result = get_all(Size, SizeSerializer)
+    return jsonify(result)
 
 # Pizza Size Routes
 
