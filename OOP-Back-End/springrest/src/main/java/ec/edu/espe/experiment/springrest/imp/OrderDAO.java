@@ -72,10 +72,11 @@ public class OrderDAO implements IOrderDAO {
         try {
             DBOrder dbOrder = new DBOrder();
             dbOrder.setName(entity.getClient_name());
-            /*dbOrder.setAddress(entity.getClient_address());
+
+            dbOrder.setAddress(entity.getClient_address());
             dbOrder.setDni(entity.getClient_dni());
-            
-            dbOrder.setPhone(entity.getClient_phone());*/
+            dbOrder.setPhone(entity.getClient_phone());
+
             dbOrder.setDate(new Date());
             dbOrder.setSize(repoSize.findById(entity.getSize()).get());
             repoOrder.save(dbOrder);
@@ -84,6 +85,8 @@ public class OrderDAO implements IOrderDAO {
             Size size = daoSize.get(dbOrder.getSize().getId());
             Float total_price = 0f;
             
+            
+
             dbOrder.setTotal(total_price);
             repoOrder.save(dbOrder);
             repoOrder.flush();
