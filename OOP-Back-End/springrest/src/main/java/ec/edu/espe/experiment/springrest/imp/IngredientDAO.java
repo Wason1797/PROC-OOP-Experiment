@@ -38,9 +38,9 @@ public class IngredientDAO implements IIngredientDAO{
 
     @Override
     public Ingredient get(Integer id){
-        Ingredient ingredient = null;
+        Ingredient ingredient = new Ingredient();
         try{
-            
+            ingredient = toIngredient(repo.findById(id).get());
         }
         catch(Exception e){
             ingredient = null;
