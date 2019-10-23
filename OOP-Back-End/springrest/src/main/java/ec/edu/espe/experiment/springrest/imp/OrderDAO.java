@@ -15,6 +15,7 @@ import ec.edu.espe.experiment.springrest.dto.Ingredient;
 import ec.edu.espe.experiment.springrest.dto.Order;
 import ec.edu.espe.experiment.springrest.dto.OrderEntityClient;
 import ec.edu.espe.experiment.springrest.dto.Size;
+import ec.edu.espe.experiment.springrest.model.DBIngredient;
 import ec.edu.espe.experiment.springrest.model.DBOrder;
 import ec.edu.espe.experiment.springrest.repo.IOrderRepo;
 import ec.edu.espe.experiment.springrest.repo.ISizeRepo;
@@ -72,10 +73,10 @@ public class OrderDAO implements IOrderDAO {
         try {
             DBOrder dbOrder = new DBOrder();
             dbOrder.setName(entity.getClient_name());
-            /*dbOrder.setAddress(entity.getClient_address());
+            dbOrder.setAddress(entity.getClient_address());
             dbOrder.setDni(entity.getClient_dni());
             
-            dbOrder.setPhone(entity.getClient_phone());*/
+            dbOrder.setPhone(entity.getClient_phone());
             dbOrder.setDate(new Date());
             dbOrder.setSize(repoSize.findById(entity.getSize()).get());
             repoOrder.save(dbOrder);
@@ -94,6 +95,7 @@ public class OrderDAO implements IOrderDAO {
         return response;
     }
 
+    
     @Override
     public Order toOrder(DBOrder dbOrder){
         Order order = new Order();

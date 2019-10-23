@@ -79,9 +79,14 @@ def update_size():
 
 @urls.route('/size/id/<_id>', methods=GET)
 def get_size_by_id(_id):
-    size = Size.query.get(_id)
+    size = Size()
     size_serializer = SizeSerializer()
-    return size_serializer.jsonify(size) if size else Response(status=404)
+    return size_serializer.jsonify(size) if size._id else Response(status=404)
+
+@urls.route('/size', methods=GET)
+def get_size():
+    result = get_all(Size, SizeSerializer)
+    return jsonify(result)
 
 
 # Order Routes

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import ec.edu.espe.experiment.springrest.dao.ISizeDAO;
+import ec.edu.espe.experiment.springrest.dto.Ingredient;
 import ec.edu.espe.experiment.springrest.dto.Size;
 
 
@@ -26,9 +27,13 @@ import ec.edu.espe.experiment.springrest.dto.Size;
 public class RestSizeController {
 
     @Autowired
-    private ISizeDAO dao;
 
-  
+    
+    private ISizeDAO dao;
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Size> getAll() {        
+        return dao.getAll();
+    }  
 
     @GetMapping(value = "/id/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Size> get(@PathVariable("id") Integer id) {
