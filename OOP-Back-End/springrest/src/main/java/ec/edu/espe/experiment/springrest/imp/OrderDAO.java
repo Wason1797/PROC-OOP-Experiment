@@ -38,12 +38,10 @@ public class OrderDAO implements IOrderDAO {
     public List<Order> getAll() {
         List<Order> list = new ArrayList<>();
         try {
-            List<DBOrder> list_order = repoOrder.findAll();
-            if (list_order != null) {
-                for (DBOrder aux_order : list_order) {
-                    Order order = new Order();
-                    order = toOrder(aux_order);
-                    list.add(order);
+            List<DBOrder> list_dbOrder = repoOrder.findAll();
+            if(list_dbOrder != null){
+                for(DBOrder dbOrder : list_dbOrder){
+                    list.add(toOrder(dbOrder));
                 }
             }
         } catch (Exception e) {
@@ -51,7 +49,7 @@ public class OrderDAO implements IOrderDAO {
         }
         return list;
     }
-
+    @Override
     public Order get(Integer id) {
         Order order = new Order();
         try {
@@ -72,17 +70,24 @@ public class OrderDAO implements IOrderDAO {
         try {
             DBOrder dbOrder = new DBOrder();
             dbOrder.setName(entity.getClient_name());
-            /*dbOrder.setAddress(entity.getClient_address());
+            dbOrder.setAddress(entity.getClient_address());
             dbOrder.setDni(entity.getClient_dni());
             
-            dbOrder.setPhone(entity.getClient_phone());*/
+            dbOrder.setPhone(entity.getClient_phone());
             dbOrder.setDate(new Date());
             dbOrder.setSize(repoSize.findById(entity.getSize()).get());
             repoOrder.save(dbOrder);
             repoOrder.flush();
             List<Ingredient> list_ingredient = daoDetail.post(dbOrder.getId(), entity.getIngredients());
             Size size = daoSize.get(dbOrder.getSize().getId());
-            Float total_price = 0f;
+            Float total_price = 0F;
+            for(Ingredient ingrediente: list_ingredient)
+            {
+                float ingredient_price = 0f;
+                total_price = total_price + ingredient_price;
+            }
+
+            
             
             dbOrder.setTotal(total_price);
             repoOrder.save(dbOrder);
