@@ -40,7 +40,13 @@ public class IngredientDAO implements IIngredientDAO{
     public Ingredient get(Integer id){
         Ingredient ingredient = null;
         try{
-            
+            Optional<DBIngredient> aux_order = repo.findById(id);
+            if (aux_order != null) {
+                ingredient = toIngredient(aux_order.get());
+            }
+            else {
+                ingredient = null;
+            }
         }
         catch(Exception e){
             ingredient = null;
