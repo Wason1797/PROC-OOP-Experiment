@@ -37,7 +37,7 @@ def update_ingredient():
 
 @urls.route('/ingredient/id/<_id>', methods=GET)
 def get_ingredient_by_id(_id):
-    ingredient = Ingredient()
+    ingredient = Ingredient.query.get(_id)
     ingredient_serializer = IngredientSerializer()
     return ingredient_serializer.jsonify(ingredient) if ingredient._id else Response(status=404)
 
@@ -46,7 +46,6 @@ def get_ingredient_by_id(_id):
 def get_ingredients():
     result = get_all(Ingredient, IngredientSerializer)
     return jsonify(result)
-
 
 # Pizza Size Routes
 
@@ -83,6 +82,10 @@ def get_size_by_id(_id):
     size_serializer = SizeSerializer()
     return size_serializer.jsonify(size) if size else Response(status=404)
 
+@urls.route('/size', methods=GET)
+def get_size():
+    result = get_all(Size, SizeSerializer)
+    return jsonify(result)
 
 # Order Routes
 
@@ -93,9 +96,9 @@ def create_order():
         if check_required_keys(('client_name', 'client_dni', 'client_address', 'client_phone', 'size'), request.json):
 
             client_name = request.json.get('client_name')
-            client_dni = None
-            client_address = None
-            client_phone = None
+            client_dni = request.json.get('client_dni')
+            client_address = request.json.get('client_address')
+            client_phone = request.json.get('client_phone')
             size_id = int(request.json.get('size'))
             ingredients = request.json.get('ingredients')
 
@@ -136,6 +139,6 @@ def get_orders():
 
 @urls.route('/order/id/<_id>', methods=GET)
 def get_order_by_id(_id):
-    order = Order()
-    order_serializer = OrderSerializer()
-    return order_serializer.jsonify({}) if order else Response(status=404)
+    order = Order.query.get(_id)
+    return OrderSerializer().jsonify(order)
+
