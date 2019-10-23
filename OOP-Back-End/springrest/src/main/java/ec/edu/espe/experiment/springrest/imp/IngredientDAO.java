@@ -17,6 +17,8 @@ public class IngredientDAO implements IIngredientDAO{
 
     @Autowired
     private IIngredientRepo repo;
+    
+    
 
     @Override
     public List<Ingredient> getAll(){
@@ -35,7 +37,7 @@ public class IngredientDAO implements IIngredientDAO{
         }
         return list;
     }
-
+    
     @Override
     public Ingredient get(Integer id){
         Ingredient ingredient = null;

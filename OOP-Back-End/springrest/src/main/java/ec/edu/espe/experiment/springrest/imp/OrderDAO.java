@@ -84,10 +84,11 @@ public class OrderDAO implements IOrderDAO {
             Size size = daoSize.get(dbOrder.getSize().getId());
             Float total_price = 0f;
                 for(Ingredient ingredient:list_ingredient){
-                    total_price=ingredient.getPrice();
+                    total_price=total_price+ingredient.getPrice();
+
                 }
                 total_price=total_price+dbOrder.getSize().getPrice();
-            dbOrder.setTotal(total_price);
+            dbOrder.setTotal(total_price);          
             repoOrder.save(dbOrder);
             repoOrder.flush();
             response = get(dbOrder.getId());
