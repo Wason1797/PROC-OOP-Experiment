@@ -16,6 +16,8 @@ public class Order{
     public Order(){
     }
 
+    
+
     public Integer get_id() {
         return _id;
     }
@@ -86,5 +88,18 @@ public class Order{
 
     public void setDetail(List<Detail> detail) {
         this.detail = detail;
-    } 
+    }
+
+    public Order(Integer _id, String client_address, String client_dni, String client_name, String client_phone,
+            String date, List<Detail> detail, Size size, Float total_price) {
+        this._id = _id;
+        this.client_address = client_address;
+        this.client_dni = client_dni;
+        this.client_name = client_name;
+        this.client_phone = client_phone;
+        this.date = date;
+        this.detail = detail;
+        this.size = size;
+        this.total_price = total_price;
+    }
 }
