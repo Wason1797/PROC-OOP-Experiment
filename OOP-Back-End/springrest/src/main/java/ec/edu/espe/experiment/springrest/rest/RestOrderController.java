@@ -43,7 +43,14 @@ public class RestOrderController{
 
   
     @PostMapping
-    public Order post(@RequestBody OrderEntityClient entity) {
-       return dao.post(entity);
+    public ResponseEntity<Order> post(@RequestBody OrderEntityClient entity) {
+        Order response=dao.post(entity);
+        if(response != null){
+            return ResponseEntity.status(HttpStatus.CREATED).body(response);
+        } else{
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
+     
+    
     }
 }
