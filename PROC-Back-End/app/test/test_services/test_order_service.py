@@ -34,9 +34,9 @@ def dummy_ingredients():
     ]
 
 
-@pytest.fixture
-def dummy_sizes():
-    return [
+#@pytest.fixture
+#def dummy_sizes():
+    #return [
         {
             'name': 'test_size1',
             'price': 10.0
@@ -52,9 +52,9 @@ def dummy_sizes():
     ]
 
 
-# @pytest.fixture
-# def dummy_orders():
-#     return
+@pytest.fixture
+def dummy_orders():
+     return
 
 
 @pytest.mark.parametrize('order,status_code,total_price', [
