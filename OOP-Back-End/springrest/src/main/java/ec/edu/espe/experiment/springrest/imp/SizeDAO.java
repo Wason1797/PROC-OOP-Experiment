@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import ec.edu.espe.experiment.springrest.dao.ISizeDAO;
 import ec.edu.espe.experiment.springrest.dto.Size;
@@ -25,12 +26,15 @@ public class SizeDAO implements ISizeDAO{
             List<DBSize> list_dbSize = repo.findAll();
             if(list_dbSize != null){
                 for(DBSize dbSize : list_dbSize){
+                    Size size = new Size();
+                    size = toSize(dbSize);
                     list.add(toSize(dbSize));
                 }
             }
         }
         catch(Exception e){
             list = new ArrayList<>();
+            list.add(new Size(1,e.toString(),(float)0));
         }
         return list;
     }
@@ -42,6 +46,8 @@ public class SizeDAO implements ISizeDAO{
             Optional<DBSize> dbSize = repo.findById(id);
             if(dbSize != null){
                 size = toSize(dbSize.get());
+            }else {
+                size = null;
             }
         }
         catch(Exception e){
@@ -93,4 +99,6 @@ public class SizeDAO implements ISizeDAO{
             dbSize.getName(), 
             dbSize.getPrice());
     }
+
+    
 }
