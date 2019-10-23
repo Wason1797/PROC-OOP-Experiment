@@ -25,16 +25,19 @@ public class SizeDAO implements ISizeDAO{
             List<DBSize> list_dbSize = repo.findAll();
             if(list_dbSize != null){
                 for(DBSize dbSize : list_dbSize){
+                    
                     list.add(toSize(dbSize));
                 }
             }
         }
         catch(Exception e){
             list = new ArrayList<>();
+    
         }
         return list;
     }
 
+    
     @Override
     public Size get(Integer id){
         Size size = null;
@@ -89,8 +92,7 @@ public class SizeDAO implements ISizeDAO{
 
     @Override
     public Size toSize(DBSize dbSize){
-        return new Size(dbSize.getId(), 
-            dbSize.getName(), 
-            dbSize.getPrice());
+
+        return new Size(dbSize.getId(), dbSize.getName(),  dbSize.getPrice());
     }
 }
