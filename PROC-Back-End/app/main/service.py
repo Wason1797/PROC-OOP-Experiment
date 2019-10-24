@@ -76,12 +76,17 @@ def update_size():
     except Exception:
         return Response(status=400)
 
-
+@urls.route('/size/id/<_id>', methods=GET)
+def get_size():
+    result=get_all(Size,SizeSerializer)
+    size = Size.query.get(_id)
+    
 @urls.route('/size/id/<_id>', methods=GET)
 def get_size_by_id(_id):
     size = Size.query.get(_id)
     size_serializer = SizeSerializer()
     return size_serializer.jsonify(size) if size else Response(status=404)
+
 
 
 # Order Routes
